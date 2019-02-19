@@ -5,5 +5,5 @@ File.open('db/csvs/actor_names.csv') do |file|
 end
 
 names.each do |name|
-  Actor.create(name: name)
+  Actor.create(name: name, sh_name: name.gsub(' ', ''))
 end
