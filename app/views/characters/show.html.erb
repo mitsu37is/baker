@@ -1,2 +1,8 @@
-<h1>Characters#show</h1>
-<p>Find me in app/views/characters/show.html.erb</p>
+<h2>声優</h2>
+<% @character.actors.each do |actor| %>
+  <%= link_to actor.sh_name, actor_path(actor) %>
+<% end %>
+<h2>アニメ</h2>
+<% @character.anime.each do |anime| %>
+  <%= link_to anime.title, anime_path(anime) %>
+<% end %>
