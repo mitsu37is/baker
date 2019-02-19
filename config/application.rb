@@ -15,5 +15,12 @@ module Baker
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.generators do |g|
+      g.test_framework :rspec,
+                       view_spec: false,
+                       helper_spec: false,
+                       routing_spec: false
+    end
   end
 end
