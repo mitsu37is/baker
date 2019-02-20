@@ -3,7 +3,7 @@ class CharactersController < ApplicationController
 
   def index
     @q = Character.ransack(params[:q])
-    @characters = @q.result(distinct: true)
+    @characters = @q.result(distinct: true).page(params[:page])
   end
 
   def show; end
