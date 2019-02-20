@@ -68,5 +68,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # search
 gem 'ransack'
 
+# pagination
+gem 'kaminari'
+
 # heroku
 gem 'pg', group: :production

@@ -3,7 +3,7 @@ class AnimesController < ApplicationController
 
   def index
     @q = Anime.ransack(params[:q])
-    @animes = @q.result(distinct: true)
+    @animes = @q.result(distinct: true).page(params[:page])
   end
 
   def show; end

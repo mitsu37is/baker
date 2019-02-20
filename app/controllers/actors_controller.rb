@@ -2,7 +2,7 @@ class ActorsController < ApplicationController
   before_action :set_actor, only: %i[show update]
   def index
     @q = Actor.ransack(params[:q])
-    @actors = @q.result(distinct: true)
+    @actors = @q.result(distinct: true).page(params[:page])
   end
 
   def show; end
