@@ -1,3 +1,19 @@
-<% @animes.each do |anime| %>
-  <%= link_to anime.title, anime_path(anime) %>
+<%= search_form_for @q, html: { class: 'w-full max-w-sm m-auto my-4' } do |f| %>
+  <div class="flex items-center border-b border-b-2 border-grey-darkest py-2">
+    <%= f.search_field :title_cont, class: 'appearance-none bg-transparent border-none w-full text-grey-darkest mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'アニメのタイトルで検索'  %>
+    <%= f.submit '検索', class: 'flex-no-shrink bg-grey-darkest hover:bg-black border-grey-darkest hover:border-black text-sm border-4 text-white py-1 px-2 rounded' %>
+  </div>
 <% end %>
+
+<div class="flex flex-wrap justify-start">
+  <% @animes.find_each do |anime| %>
+    <div class="max-w-md lg:flex">
+      <div class="border border-grey-light bg-white rounded p-4 leading-normal">
+        <div class="mb-8">
+          <div class="text-black font-bold text-xl mb-2"><%= link_to anime.title, anime_path(anime) %></div>
+          <p class="text-grey-darker text-base"><%#= anime.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

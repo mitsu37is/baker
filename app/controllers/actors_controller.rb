@@ -1,7 +1,8 @@
 class ActorsController < ApplicationController
   before_action :set_actor, only: %i[show update]
   def index
-    @actors = Actor.all
+    @q = Actor.ransack(params[:q])
+    @actors = @q.result(distinct: true)
   end
 
   def show; end
