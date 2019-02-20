@@ -1,3 +1,13 @@
-<% @anime.characters.each do |character| %>
-  <%= link_to character.name, character_path(character) %>
-<% end %>
+<div class="text-black font-bold text-xl w-5/6 m-auto my-4"><%= @anime.title %> 登場キャラクター</div>
+<div class="flex flex-wrap justify-start">
+  <% @anime.characters.each do |character| %>
+    <div class="max-w-sm m-4 lg:flex">
+      <div class="border border-grey-light bg-white rounded p-4 leading-normal">
+        <div class="mb-8">
+          <div class="text-black font-bold text-md mb-2"><%= link_to character.name, character_path(character) %></div>
+          <p class="text-grey-darker text-base"><%= character.actors[0].name %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

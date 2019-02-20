@@ -1,8 +1,16 @@
-<h2>声優</h2>
-<% @character.actors.each do |actor| %>
-  <%= link_to actor.sh_name, actor_path(actor) %>
-<% end %>
-<h2>アニメ</h2>
-<% @character.anime.each do |anime| %>
-  <%= link_to anime.title, anime_path(anime) %>
-<% end %>
+<div class="max-w-md w-5/6 m-auto my-4 lg:flex">
+  <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url(<%= asset_path("back.jpg") %>)" title="Woman holding a mug">
+  </div>
+  <div class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div class="mb-8">
+      <div class="text-black font-bold text-xl mb-2"><%= @character.name %></div>
+      アニメ : <% @character.anime.each do |anime| %>
+        <div class="text-black font-bold text-md mb-2"><%= link_to anime.title, anime_path(anime) %></div>
+      <% end %>
+      声優 : <% @character.actors.each do |actor| %>
+        <div class="text-black font-bold text-md mb-2"> <%= link_to actor.sh_name, actor_path(actor) %></div>
+      <% end %>
+      <p class="text-grey-darker text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+    </div>
+  </div>
+</div>

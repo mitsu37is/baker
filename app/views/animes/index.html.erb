@@ -1,4 +1,4 @@
-<%= search_form_for @q, html: { class: 'w-full max-w-sm m-auto my-4' } do |f| %>
+<%= search_form_for @q, html: { class: 'max-w-sm w-5/6 m-auto my-4 lg:w-full' } do |f| %>
   <div class="flex items-center border-b border-b-2 border-grey-darkest py-2">
     <%= f.search_field :title_cont, class: 'appearance-none bg-transparent border-none w-full text-grey-darkest mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'アニメのタイトルで検索'  %>
     <%= f.submit '検索', class: 'flex-no-shrink bg-grey-darkest hover:bg-black border-grey-darkest hover:border-black text-sm border-4 text-white py-1 px-2 rounded' %>
