@@ -31,6 +31,3 @@
 
 # Ignore .idea
 .idea/
-
-# Ignore csv
-*.csv
