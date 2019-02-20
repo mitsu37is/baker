@@ -5,15 +5,20 @@
   </div>
 <% end %>
 
-<div class="flex flex-wrap justify-start">
+<div class="flex flex-wrap lg:flex-col justify-start">
   <% @actors.find_each do |actor| %>
-    <div class="max-w-md m-4 lg:flex">
-      <div class="border border-grey-light bg-white rounded p-4 leading-normal">
-        <div class="mb-8">
-          <div class="text-black font-bold text-md mb-2"><%= link_to actor.sh_name, actor_path(actor) %></div>
-          <p class="text-grey-darker text-base"><%#= actor.description %></p>
+    <div class="max-w-md mx-auto my-2 w-5/6 lg:flex">
+      <div class="border-b border-grey-darkest py-2 leading-normal">
+        <div class="text-black font-bold text-md">
+          <%= link_to actor.sh_name, actor_path(actor) %>
         </div>
+        <p class="text-grey-darker"><%#= actor.description %></p>
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="w-5/6 mx-auto my-8 text-center">
+  <%= link_to_prev_page @actors, '前のページ', class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
+  <%= link_to_next_page @actors, '次のページ', class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
 </div>

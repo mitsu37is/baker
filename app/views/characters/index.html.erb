@@ -5,17 +5,20 @@
   </div>
 <% end %>
 
-<div class="flex flex-wrap justify-start">
+<div class="flex flex-wrap lg:flex-col justify-start">
   <% @characters.find_each do |character| %>
-    <div class="max-w-sm m-4 lg:flex">
-      <div class="border border-grey-light bg-white rounded p-4 leading-normal">
-        <div class="mb-8">
-          <div class="text-black font-bold text-md mb-2"><%= link_to character.name, character_path(character) %></div>
-          <p class="text-grey-darker text-base"><%#= character.actors[0]&.name %> <%#= character.anime[0].title %></p>
-        </div>
+    <div class="max-w-sm mx-auto my-2 w-5/6 lg:flex">
+      <div class="border-b border-grey-darkest py-2 leading-normal">
+          <div class="text-black font-bold text-md">
+            <%= link_to character.name, character_path(character) %>
+          </div>
+          <p class="text-grey-darker"><%= character.actors[0]&.name %> / <%= character.anime[0].title %></p>
       </div>
     </div>
   <% end %>
 </div>
 
-<%= paginate @characters %>
+<div class="w-5/6 mx-auto my-8 text-center">
+  <%= link_to_prev_page @characters, '前のページ', class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
+  <%= link_to_next_page @characters, '次のページ', class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
+</div>
