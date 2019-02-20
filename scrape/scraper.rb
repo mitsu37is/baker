@@ -18,6 +18,7 @@ class Scraper
   def analyze(html, xpath)
     chara_animes = html.search(xpath).map(&:inner_text)
     chara_animes.delete('')
+    chara_animes = chara_animes.map(&:strip)
     character = []
     animation = []
     chara_animes.each do |chara_anime|
@@ -28,7 +29,7 @@ class Scraper
     [character, animation]
   end
 
-  def savecsv(chara_anime_array, name)
+  def save_csv(chara_anime_array, name)
     CSV.open("db/csvs/pixiv_actor_#{name}.csv", 'w') do |csv|
       csv_row_array = chara_anime_array.transpose
       csv_row_array.each do |row|
@@ -41,13 +42,26 @@ class Scraper
   def scrape(name, xpath)
     html = fetch(name)
     chara_anime_array = analyze(html, xpath)
-    savecsv(chara_anime_array, name)
+    save_csv(chara_anime_array, name)
   end
 end
 
 scraper = Scraper.new()
-#actors = CSV.read('db/csvs/actor_names.csv')[0]
+actors = CSV.read('db/csvs/actor_names.csv')[0]
+error_actors = []
+actors.each do |actor_name|
+  sleep 5
+  puts 'Now scraping: ' + actor_name.delete(' ')
+  begin
+    scraper.scrape(actor_name.delete(' '), '//*[@id="article-body"]/table[1]/tr/td')
+  rescue Mechanize::ResponseCodeError, NoMethodError => e
+    error_actors.push(actor_name)
+    next
+  end
+end
 
-#actors.each do |actor_name|
-  scraper.scrape('中村悠一', '//*[@id="article-body"]/table[1]/tbody/tr/td')
-#end
+CSV.open("db/csvs/pixiv_error_actors.csv", 'w') do |csv|
+  error_actors.each do |row|
+    csv << row
+  end
+end
