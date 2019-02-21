@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_134032) do
+ActiveRecord::Schema.define(version: 2019_02_21_004219) do
 
   create_table "actor_characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "actor_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_02_19_134032) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "profile"
   end
 
   add_foreign_key "actor_characters", "actors"

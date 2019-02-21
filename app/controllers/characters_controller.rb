@@ -6,12 +6,15 @@ class CharactersController < ApplicationController
     @characters = @q.result(distinct: true).page(params[:page])
   end
 
-  def show; end
+  def show
+    @animes = @character.anime
+    @actors = @character.actors
+  end
 
   def edit; end
 
   def update
-    if @character.update(actor_params)
+    if @character.update(character_params)
       redirect_to @character, notice: 'successfully updated'
     else
       render :edit
@@ -25,6 +28,6 @@ class CharactersController < ApplicationController
   end
 
   def character_params
-    params.require(:character).permit(:name)
+    params.require(:character).permit(:name, :profile)
   end
 end
