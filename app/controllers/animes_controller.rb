@@ -11,7 +11,7 @@ class AnimesController < ApplicationController
   def edit; end
 
   def update
-    if @anime.update(actor_params)
+    if @anime.update(anime_params)
       redirect_to @anime, notice: 'successfully updated'
     else
       render :edit
