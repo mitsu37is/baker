@@ -8,7 +8,7 @@
 <div class="flex flex-wrap lg:flex-col justify-start">
   <% @characters.find_each do |character| %>
     <div class="max-w-sm mx-auto my-2 w-5/6 lg:flex">
-      <div class="border-b border-grey-darkest py-2 leading-normal">
+      <div class="border-b border-grey-darkest w-full py-2 leading-normal">
           <div class="text-black font-bold text-md">
             <%= link_to character.name, character_path(character) %>
           </div>
