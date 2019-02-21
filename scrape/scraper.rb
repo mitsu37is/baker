@@ -59,9 +59,3 @@ actors.each do |actor_name|
     next
   end
 end
-
-CSV.open("db/csvs/pixiv_error_actors.csv", 'w') do |csv|
-  error_actors.each do |row|
-    csv << row
-  end
-end
