@@ -12,7 +12,7 @@ agent.log = Logger.new('scrape/pixiv_actor_log.txt')
 
 # prepare url
 # だれかさんのPixivページ
-url = 'https://dic.pixiv.net/a/%E4%BD%90%E5%80%89%E7%B6%BE%E9%9F%B3'
+url = 'https://dic.pixiv.net/a/%E5%86%85%E7%94%B0%E7%9C%9F%E7%A4%BC'
 
 # put actor names into actors array
 html = agent.get(url)
@@ -32,7 +32,7 @@ chara_animes.each do |chara_anime|
 end
 
 # save as csv
-CSV.open('db/pixiv_actor_佐倉綾音.csv', 'w') do |csv|
+CSV.open('db/pixiv_actor_内田真礼.csv', 'w') do |csv|
   csv_row_array = [character, animation].transpose
   csv_row_array.each do |row|
     csv << row
