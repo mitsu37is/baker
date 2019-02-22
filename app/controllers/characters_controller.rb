@@ -11,7 +11,10 @@ class CharactersController < ApplicationController
     @actors = @character.actors
   end
 
-  def edit; end
+  def edit
+    @animes = Anime.all
+    @actors = Actor.all
+  end
 
   def update
     if @character.update(character_params)

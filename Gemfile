@@ -71,5 +71,8 @@ gem 'ransack'
 # pagination
 gem 'kaminari'
 
+gem 'jquery-rails'
+gem 'select2-rails'
+
 # heroku
 gem 'pg', group: :production
