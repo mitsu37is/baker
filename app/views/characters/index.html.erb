@@ -17,7 +17,7 @@
           <div class="text-black font-bold text-md">
             <%= link_to character.name, character_path(character) %>
           </div>
-          <p class="text-grey-darker"><%= character.actors[0]&.name %> / <%= character.anime[0].title %></p>
+          <p class="text-grey-darker"><%= character.actors[0]&.sh_name %> / <%= character.anime[0].title %></p>
       </div>
     </div>
   <% end %>
