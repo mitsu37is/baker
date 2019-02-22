@@ -23,8 +23,12 @@ class Scraper
     animation = []
     chara_animes.each do |chara_anime|
       m = chara_anime.match(/@|＠/)
-      character << m.pre_match
-      animation << m.post_match
+      begin
+        character << m.pre_match
+        animation << m.post_match
+      rescue NoMethodError
+        next
+      end
     end
     [character, animation]
   end
@@ -54,7 +58,7 @@ actors.each do |actor_name|
   puts 'Now scraping: ' + actor_name.delete(' ')
   begin
     scraper.scrape(actor_name.delete(' '), '//*[@id="article-body"]/table[1]/tr/td')
-  rescue Mechanize::ResponseCodeError, NoMethodError => e
+  rescue Mechanize::ResponseCodeError, NoMethodError
     error_actors.push(actor_name)
     next
   end

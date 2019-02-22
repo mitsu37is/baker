@@ -11,23 +11,28 @@ agent.user_agent_alias = 'Mac Safari'
 agent.log = Logger.new('scrape/pixiv_actor_log.txt')
 
 # prepare url
-# 小原好美さんのPixivページ
-url = 'https://dic.pixiv.net/a/%E5%B0%8F%E5%8E%9F%E5%A5%BD%E7%BE%8E'
+# だれかさんのPixivページ
+url = 'https://dic.pixiv.net/a/%E4%BD%90%E5%80%89%E7%B6%BE%E9%9F%B3'
 
 # put actor names into actors array
 html = agent.get(url)
-chara_animes = html.search('//*[@id="article-body"]/table[1]/tr/td').map(&:inner_text)
+chara_animes = html.search('//*[@id="article-body"]/table[2]/tr/td').map(&:inner_text)
 chara_animes.delete('')
+# print(chara_animes)
 character = []
 animation = []
 chara_animes.each do |chara_anime|
-  m = chara_anime.match(/@|＠/)
-  character << m.pre_match
-  animation << m.post_match
+  m = chara_anime.strip.match(/@|＠/)
+  begin
+    character << m.pre_match
+    animation << m.post_match
+  rescue NoMethodError
+    next
+  end
 end
 
 # save as csv
-CSV.open('db/csvs/pixiv_actor_小原好美.csv', 'w') do |csv|
+CSV.open('db/pixiv_actor_佐倉綾音.csv', 'w') do |csv|
   csv_row_array = [character, animation].transpose
   csv_row_array.each do |row|
     csv << row
