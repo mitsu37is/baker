@@ -76,3 +76,6 @@ gem 'select2-rails'
 
 # heroku
 gem 'pg', group: :production
+
+# access analytics
+gem 'google-analytics-rails'
