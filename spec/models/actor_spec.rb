@@ -3,14 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe Actor, type: :model do
-  it 'is valid with a name' do
-    actor = FactoryBot.build(:actor)
+  it 'is valid with a name and a sh_name' do
+    actor = Actor.new(name: '神谷 浩史', sh_name: '神谷浩史')
     expect(actor).to be_valid
   end
 
-  it 'is not valid with no name' do
-    actor = FactoryBot.build(:actor, name: nil)
+  it 'is valid with no name' do
+    actor = Actor.new(name: nil, sh_name: '神谷浩史')
+    expect(actor).to be_valid
+  end
+
+  it 'is invalid with no sh_name' do
+    actor = Actor.new(name: '神谷 浩史', sh_name: nil)
     actor.valid?
-    expect(actor.errors['name']).to include("can't be blank")
+    expect(actor.errors['sh_name']).to include("can't be blank")
   end
 end
