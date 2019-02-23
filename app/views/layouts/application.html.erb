@@ -18,6 +18,7 @@
     <% if flash[:notice] %>
       <div class="w-full text-center p-4 mx-auto">
         <%= flash[:notice] %>
+        <%= alert %>
       </div>
     <% end %>
     <%= yield %>

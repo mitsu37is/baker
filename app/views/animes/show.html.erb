@@ -1,15 +1,17 @@
 <div class="text-black font-bold text-xl w-5/6 m-auto my-4 text-center"><%= @anime.title %> 登場キャラクター</div>
+<% if user_signed_in? && current_user.admin? %>
 <div class="w-5/6 mx-auto my-8 text-center">
   <button class="bg-grey-darkest hover:bg-black font-semibold py-2 px-4 rounded-full">
     <%= link_to '編集する', edit_anime_path(@anime), class: 'text-white' %>
   </button>
 </div>
+<% end %>
 <div class="flex flex-wrap lg:flex-col justify-start">
   <% @anime.characters.each do |character| %>
     <div class="max-w-sm mx-auto my-2 w-5/6 lg:flex">
       <div class="border-b border-grey-darkest w-full py-2 leading-normal">
         <div class="text-black font-bold text-md mb-2"><%= link_to character.name, character_path(character) %></div>
-        <p class="text-grey-darker"><%= character.actors[0]&.name %></p>
+        <p class="text-grey-darker"><%= character.actors[0]&.sh_name %></p>
       </div>
     </div>
   <% end %>
