@@ -1,11 +1,13 @@
 <div class="w-5/6 lg:w-full max-w-md mx-auto my-8">
   <%= form_with(model: character, local: true, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4') do |form| %>
+    <% if user_signed_in? && current_user.admin? %>
     <div class="mb-4">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
         キャラクタの名前
       </label>
       <%= form.text_field :name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
+    <% end %>
     <div class="mb-6">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
         プロフィール
@@ -14,45 +16,12 @@
     </div>
     <div class="flex items-center justify-between">
       <%= form.submit '完了する', class: 'text-white font-semibold bg-grey-darkest hover:bg-black py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
-      <%= link_to '戻る', character_path(@character), class: 'inline-block align-baseline font-bold text-sm text-grey-darkest hover:text-black' %>
+      <div class="flex justify-between items-center">
+        <%= link_to '戻る', character_path(character), class: 'inline-block align-baseline font-bold text-sm text-grey-darkest hover:text-black' %>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to '削除', character, class: 'text-white font-semibold bg-grey-darkest hover:bg-black ml-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline', method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        <% end %>
+      </div>
     </div>
-  </form>
   <% end %>
 </div>
-
-<% if user_signed_in? && current_user.admin? %>
-<div class="w-5/6 lg:w-full max-w-md mx-auto my-8">
-  <%= form_with(model: character.anime[0], local: true, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4') do |form| %>
-    <div class="mb-4">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-        アニメの名前
-      </label>
-      <%= select_tag 'searchDropdownBox', options_for_select(@animes.map {|anime| [anime.title, anime.id]}, selected: character.anime[0]), class: "searchable" %>
-      <%= form.text_field :title, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="flex items-center justify-between">
-      <%= form.submit '完了する', class: 'text-white font-semibold bg-grey-darkest hover:bg-black py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
-      <%= link_to '戻る', character_path(@character), class: 'inline-block align-baseline font-bold text-sm text-grey-darkest hover:text-black' %>
-    </div>
-    </form>
-  <% end %>
-</div>
-<div class="w-5/6 lg:w-full max-w-md mx-auto my-8">
-  <%= form_with(model: character.actors[0], local: true, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4') do |form| %>
-
-    <div class="mb-4">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-        声優の名前
-      </label>
-      <%= collection_select :ActorCharacter, :actor_id, @actors, :id, :name, class: "searchable" %>
-      <%= select_tag 'searchDropdownBox', options_for_select(@actors.map {|actor| [actor.name, actor.id]}, selected: character.actors[0]), class: "searchable" %>
-      <%= form.text_field :name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="flex items-center justify-between">
-      <%= form.submit '完了する', class: 'text-white font-semibold bg-grey-darkest hover:bg-black py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
-      <%= link_to '戻る', character_path(@character), class: 'inline-block align-baseline font-bold text-sm text-grey-darkest hover:text-black' %>
-    </div>
-    </form>
-  <% end %>
-</div>
-<% end %>

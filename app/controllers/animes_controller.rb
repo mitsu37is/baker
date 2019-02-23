@@ -1,5 +1,5 @@
 class AnimesController < ApplicationController
-  before_action :set_anime, only: %i[show edit update]
+  before_action :set_anime, only: %i[show edit update destroy]
 
   def index
     @q = Anime.ransack(params[:q])
@@ -16,6 +16,11 @@ class AnimesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @anime.destroy
+    redirect_to root_path
   end
 
   private
