@@ -1,0 +1,2 @@
+module AnimeCharactersHelper
+end
