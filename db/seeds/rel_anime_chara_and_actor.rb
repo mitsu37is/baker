@@ -1,6 +1,6 @@
 require 'csv'
 
-animes = ['進撃の巨人']
+animes = ['進撃の巨人', '名探偵コナン']
 
 animes.each do |anime_title|
   anime = Anime.find_or_create_by(title: anime_title)
