@@ -1,6 +1,6 @@
 require 'csv'
 
-actor_name = '小原好美'
+actor_name = '小松未可子'
 actor = Actor.find_or_create_by(sh_name: actor_name)
 
 CSV.foreach("db/csvs/pixiv_actor_#{actor_name}.csv") do |row|
