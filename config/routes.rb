@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comparisons/index'
+  post 'comparisons/show'
   devise_for :users
   root to: 'characters#index'
   resources :actors

@@ -10,6 +10,10 @@
   <%= link_to '声優さん検索', actors_path, class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
 </div>
 
+<div class="w-5/6 mx-auto my-8 text-center">
+  <%= link_to '~ 声優さんを比較してみる ~', comparisons_index_path, class: 'text-white text-bold bg-grey-darkest hover:bg-black rounded py-2 px-4' %>
+</div>
+
 <div class="flex flex-wrap lg:flex-col justify-start">
   <% @characters.find_each do |character| %>
     <div class="max-w-sm mx-auto my-2 w-5/6 lg:flex">
