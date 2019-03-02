@@ -3,6 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $('.actor_search').select2({
-    width: 500,
     allowClear: true
   });

@@ -2,8 +2,8 @@
 <p>Find me in app/views/comparisons/index.html.erb</p>
 
 <%= form_with(url: comparisons_show_path, method: :post, local: true, class: 'max-w-sm w-5/6 m-auto my-4 lg:w-full') do |f| %>
-  <div class="flex items-center border-b border-b-2 border-grey-darkest py-2">
-    <%= f.collection_select :actor_ids, @actors, :id, :sh_name, { include_blank: "声優さんの名前を選択" }, multiple: true, class: "form-control actor_search" %>
-    <%= f.submit '検索', class: 'flex-no-shrink bg-grey-darkest hover:bg-black border-grey-darkest hover:border-black text-sm border-4 text-white py-1 px-2 rounded' %>
+  <div class="flex justify-between items-center border-b border-b-2 border-grey-darkest py-2">
+    <%= f.collection_select :actor_ids, @actors, :id, :sh_name, { include_blank: "" }, multiple: true, class: "form-control actor_search w-5/6" %>
+    <%= f.submit '検索', class: 'ml-2 flex-no-shrink bg-grey-darkest hover:bg-black border-grey-darkest hover:border-black text-sm border-4 text-white py-1 px-2 rounded' %>
   </div>
 <% end %>
