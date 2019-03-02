@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_000233) do
+ActiveRecord::Schema.define(version: 2019_03_02_225507) do
+
+  create_table "actor_animes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "actor_id"
+    t.bigint "anime_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_actor_animes_on_actor_id"
+    t.index ["anime_id"], name: "index_actor_animes_on_anime_id"
+  end
 
   create_table "actor_characters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "actor_id"
@@ -63,6 +72,8 @@ ActiveRecord::Schema.define(version: 2019_02_23_000233) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "actor_animes", "actors"
+  add_foreign_key "actor_animes", "animes"
   add_foreign_key "actor_characters", "actors"
   add_foreign_key "actor_characters", "characters"
   add_foreign_key "anime_characters", "animes"

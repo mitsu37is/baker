@@ -1,0 +1,16 @@
+<div class="text-black font-bold text-xl w-5/6 m-auto my-4 text-center">
+  <%= @actor1.sh_name %>さん と <%= @actor2.sh_name %>さんの共演情報
+</div>
+<div class="flex flex-wrap lg:flex-col justify-start">
+  <% @co_anime.each do |anime| %>
+    <div class="max-w-sm mx-auto my-2 w-5/6 lg:flex">
+      <div class="flex justify-between border-b border-grey-darkest w-full py-2 leading-normal">
+        <div class="text-black font-bold text-md"><%= link_to anime.title, anime_path(anime) %></div>
+<!--        <div>-->
+<!--          <p class="text-grey-darker"><%#= anime.actors_character(@actor1)[0]&.name %></p>-->
+<!--          <p class="text-grey-darker"><%#= anime.actors_character(@actor2)[0]&.name %></p>-->
+<!--        </div>-->
+      </div>
+    </div>
+  <% end %>
+</div>
