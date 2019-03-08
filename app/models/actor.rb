@@ -5,4 +5,8 @@ class Actor < ApplicationRecord
   has_many :characters, through: :actor_characters
   has_many :actor_animes, dependent: :destroy
   has_many :anime, through: :actor_animes
+
+  def character(anime)
+    characters.select{|character| character if character.anime[0] == anime}
+  end
 end
