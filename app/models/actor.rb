@@ -7,6 +7,6 @@ class Actor < ApplicationRecord
   has_many :anime, through: :actor_animes
 
   def character(anime)
-    characters.select{|character| character if character.anime[0] == anime}
+    characters.select{|character| character if character.anime.include?(anime)}
   end
 end
