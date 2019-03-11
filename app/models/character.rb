@@ -9,4 +9,8 @@ class Character < ApplicationRecord
   def actor(anime)
     actors.select { |actor| actor if actor.anime.include?(anime) }
   end
+
+  def s_anime(actor)
+    anime.select { |anime| anime if anime.actors.include?(actor) }
+  end
 end
