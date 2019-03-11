@@ -14,5 +14,6 @@ animes.each do |anime_title|
 
     ActorCharacter.find_or_create_by(actor_id: actor.id, character_id: character.id)
     AnimeCharacter.find_or_create_by(anime_id: anime.id, character_id: character.id)
+    ActorAnime.find_or_create_by(actor_id: actor.id, anime_id: anime.id)
   end
 end
