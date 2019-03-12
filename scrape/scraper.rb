@@ -5,14 +5,19 @@ require 'logger'
 require 'csv'
 
 class Scraper
+  attr_accessor :agent
+
+  def initialize
+    @agent = Mechanize.new
+    @agent.robots = 'enabled'
+    @agent.user_agent_alias = 'Mac Safari'
+    @agent.log = Logger.new('scrape/pixiv_actor_log.txt')
+  end
+
   def fetch(name)
     name = URI.escape(name)
-    url = "https://dic.pixiv.net/a/" + name
-    agent = Mechanize.new
-    agent.robots = 'enabled'
-    agent.user_agent_alias = 'Mac Safari'
-    agent.log = Logger.new('scrape/pixiv_actor_log.txt')
-    agent.get(url)
+    url = 'https://dic.pixiv.net/a/' + name
+    @agent.get(url)
   end
 
   def analyze(html, xpath)
@@ -34,13 +39,17 @@ class Scraper
   end
 
   def save_csv(chara_anime_array, name)
-    CSV.open("db/csvs/pixiv_actor_#{name}.csv", 'w') do |csv|
-      csv_row_array = chara_anime_array.transpose
-      csv_row_array.each do |row|
-        csv << row
+    if chara_anime_array[0].length != 0
+      CSV.open("db/csvs/pixiv_actor_#{name}.csv", 'w') do |csv|
+        csv_row_array = chara_anime_array.transpose
+        csv_row_array.each do |row|
+          csv << row
+        end
       end
+      puts 'All tasks successfully done.'
+    else
+      puts 'Nothing have taken.'
     end
-    puts 'All tasks successfully done.'
   end
 
   def scrape(name, xpath)
@@ -50,16 +59,14 @@ class Scraper
   end
 end
 
-scraper = Scraper.new()
+scraper = Scraper.new
 actors = CSV.read('db/csvs/actor_names.csv')[0]
-error_actors = []
 actors.each do |actor_name|
   sleep 5
   puts 'Now scraping: ' + actor_name.delete(' ')
   begin
     scraper.scrape(actor_name.delete(' '), '//*[@id="article-body"]/table[1]/tr/td')
   rescue Mechanize::ResponseCodeError, NoMethodError
-    error_actors.push(actor_name)
     next
   end
 end
