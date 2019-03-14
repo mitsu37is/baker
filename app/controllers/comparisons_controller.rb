@@ -1,11 +1,22 @@
 class ComparisonsController < ApplicationController
   def index
     @actors = Actor.all
+    @comparison = Comparison.new
   end
 
   def show
-    @actor1 = Actor.find(params[:actor_ids][1])
-    @actor2 = Actor.find(params[:actor_ids][2])
-    @co_anime = Comparison.co_animation(@actor1, @actor2)
+    @comparison = Comparison.new(comparison_params)
+    if @comparison.valid?
+      @co_anime = @comparison.co_animation
+    else
+      @actors = Actor.all
+      render :index
+    end
+  end
+
+  private
+
+  def comparison_params
+    params.require(:comparison).permit(actor_ids: [])
   end
 end
