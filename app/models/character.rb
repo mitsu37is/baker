@@ -7,10 +7,10 @@ class Character < ApplicationRecord
   has_many :anime, through: :anime_characters
 
   def actor(anime)
-    actors.select { |actor| actor if actor.anime.include?(anime) }
+    actors.select { |actor| actor.anime.include?(anime) }
   end
 
   def s_anime(actor)
-    anime.select { |anime| anime if anime.actors.include?(actor) }
+    anime.select { |anime| anime.actors.include?(actor) }
   end
 end
