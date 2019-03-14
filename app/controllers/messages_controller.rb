@@ -7,8 +7,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.valid?
       MessageMailer.contact(@message).deliver_now
-      redirect_to root_path
       flash[:notice] = "メッセージを送ってくださりありがとうございます。改善に役立てます。"
+      redirect_to root_path
     else
       flash[:notice] = "内容を記入してください。"
       render :new

@@ -14,7 +14,7 @@ agent.log = Logger.new('scrape/pixiv_actor_log.txt')
 # だれかさんのPixivページ
 url = 'https://dic.pixiv.net/a/%E8%8A%B1%E6%BE%A4%E9%A6%99%E8%8F%9C'
 
-# put actor names into actors array
+# analyze fetched html page
 html = agent.get(url)
 chara_animes = html.search('//*[@id="article-body"]/table[2]/tr/td').map(&:inner_text)
 chara_animes.delete('')
