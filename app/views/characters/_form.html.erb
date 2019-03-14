@@ -2,14 +2,14 @@
   <%= form_with(model: character, local: true, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4') do |form| %>
     <% if user_signed_in? && current_user.admin? %>
     <div class="mb-4">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+      <label class="block text-grey-darker text-sm font-bold mb-2">
         キャラクタの名前
       </label>
       <%= form.text_field :name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
     <% end %>
     <div class="mb-6">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+      <label class="block text-grey-darker text-sm font-bold mb-2">
         プロフィール
       </label>
       <%= form.text_area :profile, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline resize-none', rows: 10 %>
